@@ -11,6 +11,7 @@ const REPORTS_DIR = (process.env.REPORTS_DIR ?? '~/Desktop/weekly-reports')
 
 export type ReportMeta = {
   weekKey: string
+  displayKey: string
   generatedAt: string
   commitsCount: number
   notesCount: number
@@ -109,8 +110,12 @@ export async function listReports(): Promise<ReportMeta[]> {
   const metas = files.map((file) => {
     const content = fs.readFileSync(path.join(REPORTS_DIR, file), 'utf-8')
     const { data } = matter(content)
+    const weekKey = data.weekKey as string
+    const { start, end } = getWeekRangeByKey(weekKey)
+    const displayKey = `${weekKey}-${formatCompactDateRange(start, end)}`
     return {
-      weekKey: data.weekKey as string,
+      weekKey,
+      displayKey,
       generatedAt: data.generatedAt as string,
       commitsCount: data.commitsCount as number,
       notesCount: data.notesCount as number,

@@ -194,7 +194,7 @@ export default function HomeClient({ initialReports }: { initialReports: ReportM
                 className="flex items-center justify-between p-4 bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-800"
               >
                 <div>
-                  <span className="font-medium">{r.weekKey}</span>
+                  <span className="font-medium">{r.displayKey}</span>
                   <span className="ml-3 text-xs text-gray-400">
                     {new Date(r.generatedAt).toLocaleString('zh-CN')}
                   </span>
