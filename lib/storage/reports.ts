@@ -4,7 +4,7 @@ import matter from 'gray-matter'
 import type { GeneratedReport } from '../ai/minimax'
 import type { GithubCommit } from '../sources/github'
 import type { Note } from '../sources/notes'
-import { formatDateRange, getWeekRangeByKey } from '../week'
+import { formatCompactDateRange, getWeekRangeByKey } from '../week'
 
 const REPORTS_DIR = (process.env.REPORTS_DIR ?? '~/Desktop/weekly-reports')
   .replace(/^~/, process.env.HOME ?? '')
@@ -34,7 +34,7 @@ export async function saveReport(
   ensureReportsDir()
 
   const { start, end } = getWeekRangeByKey(weekKey)
-  const dateRange = formatDateRange(start, end)
+  const compactRange = formatCompactDateRange(start, end)
   const generatedAt = new Date().toISOString()
 
   const commitsRaw = raw.commits
@@ -50,7 +50,7 @@ export async function saveReport(
     .join('\n\n')
 
   const markdown = matter.stringify(
-    `# 周报 ${weekKey} (${dateRange})
+    `# 周报 ${weekKey}-${compactRange}
 
 ## Obsidian 笔记摘要
 

@@ -67,3 +67,9 @@ export function formatDateRange(start: Date, end: Date): string {
     `${d.getMonth() + 1}月${d.getDate()}日`
   return `${fmt(start)} - ${fmt(end)}`
 }
+
+export function formatCompactDateRange(start: Date, end: Date): string {
+  const fmt = (d: Date) =>
+    `${d.getMonth() + 1}${String(d.getDate()).padStart(2, '0')}`
+  return `${fmt(start)}-${fmt(end)}`
+}
