@@ -47,18 +47,19 @@ ${notesText}
 【Obsidian 笔记】
 ${obsidianText}
 
-请输出四段，使用 JSON 格式：
+请输出四个字段，使用 JSON 格式，示例：
+
 {
-  "githubSummary": "...",
-  "notesSummary": "...",
-  "obsidianSummary": "...",
-  "overallSummary": "..."
+  "githubSummary": "1. xxx\\n2. yyy\\n3. zzz",
+  "notesSummary": "1. xxx\\n2. yyy\\n3. zzz",
+  "obsidianSummary": "1. xxx\\n2. yyy\\n3. zzz",
+  "overallSummary": "**技术**\\n1. xxx\\n2. yyy\\n\\n**学习**\\n1. xxx\\n\\n**其他**\\n1. xxx"
 }
 
 要求：
-- 每段 3-5 条要点，使用编号列表格式（1. 2. 3. 开头），每条单独一行
-- 中文，简洁
-- 总结要提炼主线，不是简单罗列
+- githubSummary / notesSummary / obsidianSummary：3-5 条，用 1. 2. 3. 编号，每条之间用 \\n 换行
+- overallSummary：按主题分类（如技术、学习、健康、生活等，根据实际内容决定分几类），每类用 **类别名** 作标题，类别之间空一行（\\n\\n），类别内用 1. 2. 3. 编号
+- 中文，简洁，提炼主线，不是简单罗列
 - 只输出 JSON，不要有其他内容`
 
   const response = await client.messages.create({
