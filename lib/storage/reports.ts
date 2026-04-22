@@ -23,7 +23,9 @@ function ensureReportsDir() {
 }
 
 function reportPath(weekKey: string): string {
-  return path.join(REPORTS_DIR, `${weekKey}.md`)
+  const { start, end } = getWeekRangeByKey(weekKey)
+  const compactRange = formatCompactDateRange(start, end)
+  return path.join(REPORTS_DIR, `${weekKey}-${compactRange}.md`)
 }
 
 export async function saveReport(
